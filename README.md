@@ -128,6 +128,33 @@ QuartziteDenali002_Sphere.png
 - after paint -> on the left panel the image needs to be saved.
 
 ## Part 06: Geometry Nodes
+- geometry nodes workspace
+- geometry nodes is actually a modifier
+- close geometry nodes spreadsheet (the joint area between the 2 panels -> right click -> join areas -> drag from 3d viewport panel to spreadsheet panel)
+- NOTE: with icing selected...
+- click new
+- group input (left) (original mesh) -> do stuff here.. (add nodes inbetween) -> group output (right)
+- the mesh does not change, updates are done on object as a modifier
+
+#### donut sprinkles (3min20)
+- TODO: scatter points onto mesh
+- add (SHIFT + A) -> points -> distribute points on faces
+- instead of replacing icing, leave original icing geometry -> add (SHIFT + A) -> geometry -> join geometry (this should be before group output)
+- this adds sprinkles to the icing instead of replacing it
+- NOTE: the shape of the connector on the join geometry -> geometry (shape is pill instead of circle) this means it can take multiple inputs
+- connect from group input (left) (original mesh) -> into join geometry node
+- if you render at this point you wont see anything..because the points in the geometry nodes dont actually exist (only exist in 3d space), if you want them to show in render, you need to tell blender what to render these points as.
+
+#### sprinkle uv sphere
+- TODO: add object to be sprinkle
+- create UV sphere (12 segments, 8 rings, radius 0.01)
+- you need to now reference this uv sphere in geometry node system..
+- learnt about pinning the geometry node system of a mesh: pin the icing geometry node system.
+- from scene collection (right top)-> drag the uv sphere into geometry node system
+- now you need another node to represent and reference the uv sphere: add (SHIFT + A) -> instances -> instances on points
+- you want to drop this "instances on points" node between "distribute points on faces" and "join geometry"
+- if you render, the sprinkles will actually display
+
 ## Part 07: Geometry Nodes (Long Sprinkles)
 ## Part 08: Rendering!
 ## Part 09: Layout
