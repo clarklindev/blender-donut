@@ -8,9 +8,13 @@ F3 - search
 - learn interface shortcuts
 
 ## Part 02: basic modelling
+
+![basic modelling](./02-basic-modelling.png)
 - learnt about making a donut shape but tweaking it so it doesnt look perfect using proportional editing and circle of influence
 
 ## Part 03: Modelling the Icing
+
+![modeling icing](./03-modelling-the-icing.png)
 - create icing by duplicating donut (SHIFT + D)
 - delete bottom half of duplicate
 - z-fighting 
@@ -50,6 +54,8 @@ snap individual elements to
 
 ## Part 04: Sculpting
 
+![sculpting](./04-sculpting.png)
+
 PART 1 (0-> 3min)
 - fix the mesh icing vs donut where the icing vertices are in the donut (overlaps)
 - FIX: we want the icing to wrap the donut
@@ -85,6 +91,9 @@ PART 2 (> 3min )
 - use grab tool to taper the icing before the end drip
 
 ## Part 05: Shading
+
+![shading](./05-shading_3.png)
+![shading workspace settings](./05-shading-counter-top-shading-workspace-settings.png)
 
 ### TODO: create marble counter-top (plane) to put donut on
 
@@ -128,6 +137,8 @@ QuartziteDenali002_Sphere.png
 - after paint -> on the left panel the image needs to be saved.
 
 ## Part 06: Geometry Nodes
+![geometry nodes render](./06-geometry-nodes-render-01.png)
+
 - geometry nodes workspace
 - geometry nodes is actually a modifier
 - close geometry nodes spreadsheet (the joint area between the 2 panels -> right click -> join areas -> drag from 3d viewport panel to spreadsheet panel)
@@ -154,7 +165,42 @@ QuartziteDenali002_Sphere.png
 - now you need another node to represent and reference the uv sphere: add (SHIFT + A) -> instances -> instances on points
 - you want to drop this "instances on points" node between "distribute points on faces" and "join geometry"
 - if you render, the sprinkles will actually display
+- it appears jagged edges -> select the object in "scene collection" (top-right panel) -> "numberpad's . key" or "`" key will focus on the selection -> right click smooth
 
+#### sprinkle density
+![sprinkle density](./06-geometry-nodes-sprinkle-density-and-weight-painting.png)
+
+- density: if you increase density, the sprinkles overlap...we can fix this..
+- FIX: geometry nodes -> "distribute points on faces" -> distribution method -> "poisson disk" (previously "random")
+- poisson disk gives extra property you can tweak "distance min" it creates a radius around the uv sphere sprinkle and if it detects a point within this radius it will delete the point
+
+#### weight painting
+- PROBLEM: sprinkles are generated even on the negative space (underneath the icing - which will actually be rendered)
+- FIX: weight painting - with icing selected go into "weight painting mode"
+- mesh becomes blue 
+- weight painting allows you to assign a value between 0 and 1 onto the mesh -> so that we can reference this in our geometry nodes as a density mask for our sprinkles
+- if you paint (red is 1 blue is 0) and this get added to right panel under object data properties -> vertex group (relabel)
+- so from "distribute points on faces" -> density factor -> drag out (search for "named attribute" node)
+- in this node (named attribute) -> click on "name" -> and select what you labelled it
+- so it only applies sprinkles where we did weight painting and you can go back into weight painting mode to add more sprinkles
+
+#### duplicate object (donut) but still customizable so its unique
+![exposing props to modifier stack](./06-geometry-nodes-exposing-props-to-geometry-nodes-modifier-stack.png)
+- duplicate donut -> you will notice nodes are shared across both objects
+- FIX: you can expose props that you want to be customizable in the geometry nodes modifier stack (it dissapears from the node but appears in the modifier as a setting you can adjust) 
+- it essentially remove the value from the node and saying its its own separate thing (independent per object)
+
+#### rename exposed node props
+- you can rename these exposed values -> geometry nodes workspace -> n (menu) -> geometry -> rename the node property from "density max" to "sprinkle density"
+
+#### realworld sizing
+- if you rescale the (donut) to be realworld dimensions (eg 12cm) its about 10 percent of the current size (plane, icing, sprinkles) should also be adjusted..
+
+- apply the scale ("S" to scale down at whole increments hold down CTRL while moving mouse)
+- a lot of sprinkles dissapear because "sprinkle density" is actually in relation to the whole scene and when the donut is so much smaller there is less chance of sprinkle "hitting" the icing.
+- FIX: 1. adjust sprinkle density higher 2. adjust distance min lower
+- you can add a math node (SHIFT + A -> utilities -> math -> math) to recalculate values so they are within a realistic range
+ 
 ## Part 07: Geometry Nodes (Long Sprinkles)
 ## Part 08: Rendering!
 ## Part 09: Layout
