@@ -47,8 +47,16 @@ snap individual elements to
 #### create icing drip
 - select 2 vertices -> drag down on z axis -> extend again
 
-
 ## Part 04: Sculpting
+- fix the mesh icing vs donut where the icing vertices are in the donut (overlaps)
+- FIX: we want the icing to wrap the donut
+- this lesson (0-> 3min) we learn about modifier -> deform -> shrink wrap modifier 
+- it needs a target -> what are we shrink wrapping (what is the mesh we are shrink wrapping) ie the donut -> eyedropper picker select the donut as target
+- modifier stack order matters: 1. shrinkwrap, 2. solidify, 3. subdivision
+- it corrects the vertices alignment: donut vs icing
+- you can apply the shrinkwrap modifier...
+
+
 ## Part 05: Shading
 ## Part 06: Geometry Nodes
 ## Part 07: Geometry Nodes (Long Sprinkles)
