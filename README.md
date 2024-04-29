@@ -48,14 +48,40 @@ snap individual elements to
 - select 2 vertices -> drag down on z axis -> extend again
 
 ## Part 04: Sculpting
+
+PART 1 (0-> 3min)
 - fix the mesh icing vs donut where the icing vertices are in the donut (overlaps)
 - FIX: we want the icing to wrap the donut
-- this lesson (0-> 3min) we learn about modifier -> deform -> shrink wrap modifier 
+- this lesson we learn about modifier -> deform -> shrink wrap modifier 
 - it needs a target -> what are we shrink wrapping (what is the mesh we are shrink wrapping) ie the donut -> eyedropper picker select the donut as target
 - modifier stack order matters: 1. shrinkwrap, 2. solidify, 3. subdivision
 - it corrects the vertices alignment: donut vs icing
 - you can apply the shrinkwrap modifier...
 
+PART 2 (> 3min )
+- the accumulation of icing (pooling) at the end of the drip -> because icing is viscous fluid, once it runs out, there is no momentum / gravity from the weight of the icing.
+- FIX: create a build up of icing along the icing edges and end of icing drips BUT to do this our icing needs depth -> apply the solidify modifier to fix the shape
+- subdivision surface modifier -> update levels viewport to 2 -> apply
+
+#### inflate tool
+- sculpting mode: inflate tool (i) 
+- change size of brush (F) (then use mouse to pull in/out)
+- draw in little circles with the inflate tool
+
+#### mesh filter tool 
+- use mask tool (M) to mask off areas that should not be affected
+- ALSO with mask -> brush -> select "front faces only" -> this makes sure you dont accidentally mask/paint the inner surfaces
+- then you want to inverse the mask you painted so it only allows you to paint on the masked area (white) where the now masked out area is black.
+- smooth out the mask -> mask -> smooth mask
+- to apply uniform inflation across the whole donut -> mesh filter tool -> and it applies a uniform value using the filter which you have to select (inflate) -> use mouse hold in click and move to less/more effect.
+- decrease the strength so its subtle
+- turn off mask (ALT + M)
+
+#### smooth tool 
+- smooth tool (hold shift) to smooth out places where the mask effect from mesh filter tool inflated the icing too much
+
+#### grab tool
+- use grab tool to taper the icing before the end drip
 
 ## Part 05: Shading
 ## Part 06: Geometry Nodes
