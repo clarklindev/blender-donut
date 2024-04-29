@@ -1,5 +1,6 @@
 Beginner Blender 4.0 Tutorial
 # Blender Guru
+F3 - search 
 
 ## Part 01: fundamental user interface basics
 - 80/20 rule -> 20% of blender features are used 80% of the time
@@ -84,6 +85,48 @@ PART 2 (> 3min )
 - use grab tool to taper the icing before the end drip
 
 ## Part 05: Shading
+
+### TODO: create marble counter-top (plane) to put donut on
+
+#### parent tool
+- make the donut parent the icing (icing attached to donut)
+- start by selecting the "child" (icing)
+- then hold down SHIFT + select parent (donut)
+- parent (CTRL + P) / F3 "parent" -> parent keep transform (this retains the positioning)
+
+#### counter-top
+- material -> surface -> base color (circle button next to word "base colour") -> image texture
+- requires texture: https://www.poliigon.com/ -> search "danali" marble texture -> DOWNLOAD asset
+- shader workspace -> nodes -> can add more nodes between nodes
+- PBR Shader...connect assets to material node (principle BSDF) (you can drag out from principle BSDF node's - image texture color)
+
+#### principle BSDF base color
+- link to new image texture -> QuartziteDenali002_COL_8K_METALNESS.png
+
+#### principle BSDF roughness
+- link to new image texture -> QuartziteDenali002_ROUGHNESS_8K_METALNESS.png
+- set color space: sRGB -> non-color (need to tell blender not to look at color map but the data values)
+
+#### principle BSDF Normal
+- this is the material bumpiness
+- link to new image texture -> QuartziteDenali002_NRM_8K_METALNESS.png 
+- set color space: sRGB -> non-color (need to tell blender not to look at color map but the data values)
+- convert the image data into something principle BSDF can read: between normals texture node and principle bsdf node... add a node: add (SHIFT + A) -> vector -> normal map 
+- if you zoom in (CTRL + SPACE) you can see tiny bumps, scratches 
+
+#### assets (unused)
+QuartziteDenali002_METALNESS_8K_METALNESS.png
+QuartziteDenali002_Sphere.png
+
+### TODO: texture paint the donut
+#### Texture paint
+- texture painting on the donut because when frying the donut, the part closer to surface away from oil cooked less and when flipped to opposite side, leaves middle part less "fried" as its always floating at the middle.
+- texture paint allows you to paint directly onto mesh -> but you need to apply material (not a base color) but choose image texture
+- instead of "open" -> select "new" to create new image -> choose image color
+- on texture paint workspace -> left panel -> select the new created image from dropdown
+- on texture paint workspace -> right panel -> texture paint mode -> can paint on the texture
+- after paint -> on the left panel the image needs to be saved.
+
 ## Part 06: Geometry Nodes
 ## Part 07: Geometry Nodes (Long Sprinkles)
 ## Part 08: Rendering!
