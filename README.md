@@ -202,6 +202,68 @@ QuartziteDenali002_Sphere.png
 - you can add a math node (SHIFT + A -> utilities -> math -> math) to recalculate values so they are within a realistic range
  
 ## Part 07: Geometry Nodes (Long Sprinkles)
+- objects are added to 3d cursor -> to move 3d cursor (SHIFT + RIGHT CLICK) 
+
+#### sprinkle
+- MODEL: use a cylinder (12 vertices, radius 0.001, depth 0.001) for the sprinkles 
+- right click shade smooth
+- when objects are tiny, it may dissapear when zooming in, this is because of clipping
+- FIX: menu (n) -> view -> clip start: 0.001 m
+- rounded ends of cylinder -> select top/bottom faces -> bevel (CTRL + B) and use mouse wheel to create more loop cuts (around x3)
+- proportional editing off 
+- duplicate (shift + d) and make the medium, long and curved duplicates
+
+#### curved sprinkle 
+- the curved sprinkle needs more loop cuts on the body
+- BENDING: add modifier -> deform -> simple deform -> bend
+
+#### different types: sprinkle type
+1. short
+2. medium
+3. long
+4. curved
+
+#### making a donut with (short,med,long, curved) sprinkles (12min)
+
+![sprinkle-collection-and-rotation](./07-geometry-nodes-long-sprinkle-collection-and-rotation.png)
+
+- duplicate the donut and icing (SHIFT + D)
+- select icing on duplicate donut -> if you go to the modifier stack -> geometry nodes -> it shows how many instances use the node 
+- if you click on this number (eg if it was 2), it creates independent instances (label it eg. "long sprinkles" and "round sprinkles")
+- reorganize sprinkles -> "round" and "long" group in scene collection
+- geometry nodes workspace: 
+- NB: ensure long sprinkle icing is the pinned one
+
+#### scattering different types of sprinkles
+- select the icing on the duplicate donut -> remove object info "sprinkle sphere info" node (BUT replace by dragging long type sprinkles collection into the space)
+- it creates a new "collection info" node -> and connect to "instance on points" node's instance
+- the icing shows but its very offset..
+- under collection info node.. check separate children
+- under collection info node.. check reset children
+- at this point, it puts each of the long sprinkle type at each point. FIX: "instance on points" node -> check "pick instance" now it randomly selects one from the collection
+
+#### fix sprinkle instance rotation
+- the rotation is wrong (they all point upwards)
+- FIX: rotate the sprinkle assets (spares) so they lay horizontally AND apply the rotation
+- the sprinkles are all aligned at same angle, to create a random rotation, between "distribution points on faces" node and "instance on points" node
+- connection rotation between nodes "distribution points on faces" node and "instance on points" they align with the donut but we want a random rotation
+- FIX: add rotate euler: add (SHIFT + A) -> utilities -> rotation -> rotate euler -> icing is arranged in circle flow 
+
+#### rotate euler
+- set method used to describe rotation: "euler"
+- set base orientation for rotation to "local"
+
+#### random value node
+- FIX: drag out from "rotate by" on the "rotate euler" node -> add "random value" node
+- min/max values are for vector x,y,z
+- tweak max-z (value is in radians) -> to make 360 deg (2 x pie) = "tau" = 6.283 
+
+![rotate-value-random-value](./07-geometry-nodes-long-sprinkle-rotate-euler-random-value.png)
+
+#### sprinkle tweaks
+- update scale on "instance on points" node to 1.5
+- set "distribute points on faces" -> distance min: 0.006m
+
 ## Part 08: Rendering!
 ## Part 09: Layout
 ## Part 10: Lighting
