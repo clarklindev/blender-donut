@@ -264,7 +264,53 @@ QuartziteDenali002_Sphere.png
 - update scale on "instance on points" node to 1.5
 - set "distribute points on faces" -> distance min: 0.006m
 
-## Part 08: Rendering!
+## Part 08: Rendering
+- this part is about giving the sprinkles color
+- DO NOT color the asset sprinkles manually by giving the asset instance a material color 
+- WHY NOT? color becomes locked to that sprinkle -> this ends up giving each (eg. all curved sprinkles) the same color
+- WHY NOT? color distribution is same
+
+#### linking materials (to apply same material accross many objects by linking)
+- create a material and apply it to single sprinkle asset
+- then shift + select all other sprinkles and again the sprinkle with the material (so it becomes the active object) lighter orange than the others
+- then link (CTRL + L) -> link materials
+
+#### object info node / color ramp node
+
+![08-rendering-sprinkle-color-object-info-node-color-ramp-node](./08-rendering-sprinkle-color-object-info-node-color-ramp-node.png)
+- select sprinkle -> SHADING viewport -> add (SHIFT + A) -> input -> object info node
+- object info node has a "random" -> connect it to Principle BSDF's "base color" -> this assigns random value on scale between 0 and 1 and assigns it as colors
+- now add a color ramp node: add (SHIFT + A) -> converter -> color ramp
+- you can set colors (but its on a gradient) which makes the sprinkles colors have gradient
+- FIX: update interpolation on color ramp to "constant" -> now if you drag the colors on the scale it becomes a ratio of occurance of sprinkles on the donut
+- FIX: use HSV -> set saturation lower (less attention grabbing: 0.8)
+
+#### making metalic sprinkles
+![08-rendering-sprinkle-color-ramp-metalic-color-ramp-roughness.png](./08-rendering-sprinkle-color-ramp-metalic-color-ramp-roughness.png)
+- playing with principle BSDF metallic value (set to 1) makes all sprinkles metalic
+- FIX: order the colors so the metallic colors are on one side (easier) 
+- FIX: duplicate color ramp + retain connection (CTRL + SHIFT + D) 
+- connect new color ramp duplicate to metalic on principle BSDF -> set non metal colors to RGB black and metals to white (because its a scale black or white you only need 2 colors on the color bar) 
+- FIX: to make sprinkle more metalic reduce roughness all the way down
+
+#### making normal color sprinkles less shiny (finishes at 10min22sec)
+- duplicate the metalic sprinkles color ramp (CTRL + SHIFT + D)
+- FIX: hook up the now duplicate metalic color ramp the color to roughness on principle BSDF
+- the blacker (lower roughness) and whiter (more rough) now decide the roughness of metalic and non-metallics (should be opposite to metalic color ramp color)
+- render with cycles render mode to see metalic colors
+
+![08-rendering-sprinkle-color-render.png](./08-rendering-sprinkle-color-render.png)
+
+#### RENDERING (10min22sec)
+
+#### fly mode
+- turn on fly mode: scene collection outliner (top-right panel): with camera selected -> fly mode (SHIFT + `) 
+- alternatively: view -> navigation -> fly navigation
+- when fly mode is on, moving the mouse will move where camera looks... 
+- use W,S,A,D, use E (up) and Q (down) to control camera panning and mouse wheel controls speed of effect
+- render with eevee (fast real-time rasterized render engine -> but not accurate) 
+- render with cycles (ray-trace / path-trace / offline render engine -> slower)
+
 ## Part 09: Layout
 ## Part 10: Lighting
 ## Part 11: Compositing
