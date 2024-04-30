@@ -309,7 +309,29 @@ QuartziteDenali002_Sphere.png
 - when fly mode is on, moving the mouse will move where camera looks... 
 - use W,S,A,D, use E (up) and Q (down) to control camera panning and mouse wheel controls speed of effect
 - render with eevee (fast real-time rasterized render engine -> but not accurate) 
-- render with cycles (ray-trace / path-trace / offline render engine -> slower)
+- render with cycles (ray-trace / path-trace / offline render engine -> slower but better renders)
+
+#### eevee
+- you can make eevee render look better:
+- shadows -> cube size -> 4096px
+
+#### cycles
+- proper shadows (eg. sprinkles) 
+- bounce lighting
+- you can use gpu to render: edit -> preferences -> system -> cycles render devices
+- render -> scene -> device -> GPU
+- denoiser: sampling -> denoise
+- denoiser: render -> denoise
+- reset position of light -> select light -> reset (ALT + G)
+
+#### material with subsurface scatter (flesh/food)
+
+![08-rendering-cycles-render-with-subsurface-scatter.png](./08-rendering-cycles-render-with-subsurface-scatter.png)
+- subsurface scatter is when light shines though objects
+- FIX: select icing / sprinkle asset -> materials -> subsurface -> weight -> 1.0
+- FIX: select icing / sprinkle asset -> materials -> subsurface -> subsurface radius represents (x,y,z) and/or (RGB) (by default set to values for skin) -> reset to 1.0 for all radius
+- FIX: select icing / sprinkle asset -> materials -> subsurface -> subsurface scale is thickness -> 0.005m
+- subsurface scattering automatically cancelled for metals
 
 ## Part 09: Layout
 ## Part 10: Lighting
