@@ -1,6 +1,6 @@
-Beginner Blender 4.0 Tutorial
-# Blender Guru
-F3 - search 
+# Beginner Blender 4.0 Tutorial
+
+- F3 - search 
 
 ## Part 01: fundamental user interface basics
 - 80/20 rule -> 20% of blender features are used 80% of the time
@@ -339,3 +339,6 @@ QuartziteDenali002_Sphere.png
 ## Part 12: Animation
 ## Part 13: Rendering
 ## Part 14: Finale!
+
+## Reference
+- [Blender Guru](https://www.youtube.com/playlist?list=PLjEaoINr3zgEPv5y--4MKpciLaoQYZB1Z)
