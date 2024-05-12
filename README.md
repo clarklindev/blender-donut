@@ -380,6 +380,56 @@ SHIFT ` - fly view mode
 ---
 
 ## Part 10: Lighting
+- currently the scene looks like you're outside picnicking under a tree because the light is coming from all directions
+- we want to give it the effect that it feels like you're inside a kitchen where sunlight is coming in from the windows
+- replace light: currently light (sun) 
+- move donuts/plate to edge of counter away from backsplash (create depth of field later...)
+
+#### achieving natural skylight
+- scene -> world tab (can remove background)
+- using natural sky light (creates exact view of the sky)
+- remove light in scene
+- scene collection selected -> world propertaies -> surface -> color (DOT) -> sky texture 
+- tweakable: sun size: 2.44 (real sun size in relation to the earth), sun rotation, sun elevation
+
+#### creating a skybox / snapping mode 
+- blender file created so can reuse the skybox
+- creating a skybox (geometry) which contains / restricts the light by adding a cube to scene
+- wireframe mode: line up the corners of the cube with the backsplash/counter
+- camera sits inside the skybox
+- remove redundant faces of skybox (back which cooincides with backsplash, floor which cooincides with counter)
+- INSET a side of the skybox for the window and DELETE the inset face
+- NOTE: the light from the open side of the skybox is causing the face its shining on the reflect/refract the color from the skybox... FIX: paint wall black to stop bounce light
+- adjust the hole size on the face letting in light
+- scene -> world -> surface -> strength: this is the strength of the lighting on the world (sky texture)
+- scene -> world -> surface -> adjust sun intensity instead: 0.5 then play with color 
+- then you can play with render properties tab -> color management -> exposure: -2
+
+#### snapping for alignment
+- in edit mode
+- Grab object in face mode (G) -> snapping mode (B) -> now you have to choose the origin of the object that you are moving that you want to be the snapping point... -> then select the point where it should snap to
+    - circle (snap to face)
+    - crosshair (snap to edge)
+    - triangle (snap to middlepoint of edge)
+    - square (snap to vertice)
+
+#### SHORTCUTS 
+B - snapping mode
+
+#### "sky texture" via shading viewport
+- the above method can be also achieve using shading viewport 
+- shader type -> world
+- add sky texture node -> link sky texture node to background node
+- preview in viewport shading mode: render preview
+
+#### importing other models
+- file -> append -> object 
+
+![10-results-lighting-using-skybox-28mm](./10-lighting-using-skybox-28mm.png)
+![10-results-lighting-using-skybox-30mm](./10-lighting-using-skybox-30mm.png)
+
+---
+
 ## Part 11: Compositing
 ## Part 12: Animation
 ## Part 13: Rendering
