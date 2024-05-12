@@ -333,7 +333,52 @@ QuartziteDenali002_Sphere.png
 - FIX: select icing / sprinkle asset -> materials -> subsurface -> subsurface scale is thickness -> 0.005m
 - subsurface scattering automatically cancelled for metals
 
+---
+
 ## Part 09: Layout
+
+![09-plate-of-donuts.png](./09-plate-of-donuts.png)
+
+- TASK: make a plate
+- suggestion: start with a circle instead of cylinder (reason is cylinder theres a top face you dont need and the normals have to be flipped for shape without top face) 
+- suggestion: use split screen with one as Image editor -> image -> open
+- create circle
+- radius 0.12m / vertices 100 (high poly because of bevels on plate) 
+- select vertices -> extrude (e) on z -> then scale out (s)
+- extrude (e) -> scale (s) scale immediately after hitting extrude
+- select all initial vertices of circle and add face (f)
+- plate bevel: in edge mode -> select the 3 edges (alt + mouse click on edges + shift click on other edges) ->  add bevel for plate (3 curves of plate -> select edge) -> ctrl + B -> use mouse wheel for smoothing bevel
+- thickness: add modifier -> solidify
+- top plate edge needs the solidify modifier to be applied (object mode) -> apply solidify modifier
+- apply bevel to 2 top bevels 
+- for the overlap of the bevel...clamp overlap (c)-> turns on clamping (see bottom of viewport for shortcuts available): bevels to point where edges touch then stops
+- right-click -> shade smooth 
+- stack donuts (shift + D) on top each other (use slight rotation) 
+- rotate on z -> (double click z -> to rotate on donuts own local z-axis)
+
+#### random donut icing
+- could use color ramp node...
+- tutorial method -> create different materials for the different colors of the icing
+- create another color: select the donut icing (currently under material shows number of instances with same color) -> click to make its own instance
+
+#### plate details
+- low roughness to give it a shine (0.01)
+- subsurface: weight 1, radius (x,y,z): 1, scale: 0.001m
+
+#### merge vertices / vertices cleanup
+- vertices sharing same space will cause artifacting (cause by extrusions -> edges merge but sharing same space)
+- FIX: edit mode -> select all (a) -> merge (m) -> by distance -> bottom of screen (shows how many vertices cleaned up) 
+
+#### adjusting camera
+- select camera -> CAMERA object data properties tab -> view port display -> size: 0.1
+
+#### SHORTCUTS 
+z - switch between view modes  
+m - select all in edit mode -> merge vertices (m) -> by distance  
+SHIFT ` - fly view mode  
+
+---
+
 ## Part 10: Lighting
 ## Part 11: Compositing
 ## Part 12: Animation
