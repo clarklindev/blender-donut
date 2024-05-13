@@ -399,7 +399,8 @@ SHIFT ` - fly view mode
 - camera sits inside the skybox
 - remove redundant faces of skybox (back which cooincides with backsplash, floor which cooincides with counter)
 - INSET a side of the skybox for the window and DELETE the inset face
-- NOTE: the light from the open side of the skybox is causing the face its shining on the reflect/refract the color from the skybox... FIX: paint wall black to stop bounce light
+- NOTE: the light from the open side of the skybox is causing the face its shining on the reflect/refract the color from the skybox... 
+- FIX: paint wall black to stop bounce light (material surface -> change from principled BSDF to Diffuse BSDF)
 - adjust the hole size on the face letting in light
 - scene -> world -> surface -> strength: this is the strength of the lighting on the world (sky texture)
 - scene -> world -> surface -> adjust sun intensity instead: 0.5 then play with color 
@@ -431,6 +432,21 @@ B - snapping mode
 ---
 
 ## Part 11: Compositing
+
+#### fixing the scene lighting
+- TODO: add light (area) on right of plate of donuts -> scale down and cast light (point) towards plate (scale: larger more spread / less intense) size: 0.19m, power: 600 mW (less that 1w)
+- TODO: fix lighting refraction from black wall (right wall which is where sunlight shines onto from left) -> due to the light bounce off the wall its difficult to control light
+- FIX: replace the material color value (click on color select box) -> value: 0
+- FIX: fixed objects on stage orientation, the skybox opening is on left, the camera is facing back (from front view), the backsplash is visible in front-view pointed at by camera
+- FIX: scene -> world properties tab -> sun intensity: 0.5, sun rotation: -89deg 
+
+#### compositing (3min21sec)
+- compositor: add effects to final render
+- TODO: add glare to simulate camera
+- compositor viewport: left node (original) -> right node (result output)
+
+---
+
 ## Part 12: Animation
 ## Part 13: Rendering
 ## Part 14: Finale!
