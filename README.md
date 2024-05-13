@@ -441,9 +441,64 @@ B - snapping mode
 - FIX: scene -> world properties tab -> sun intensity: 0.5, sun rotation: -89deg 
 
 #### compositing (3min21sec)
+
+![tutorial settings](./11-compositing-settings.png)
+
 - compositor: add effects to final render
 - TODO: add glare to simulate camera
-- compositor viewport: left node (original) -> right node (result output)
+- compositor viewport (left node (original) -> right node (composite node: result output))
+- click "use nodes" 
+- preview available once you have atleast rendered the scene
+- reduce render max samples: render properties tab -> max samples (from 4096) -> 100
+- TO SEE EFFECTS OF just the node (CTRL + SHIFT + left click) (note if the copositing node tree "rewires", just select a node further down the join tree and CTRL + SHIFT + left click on that to preview the final result)
+
+#### preview effects in realtime
+- split viewport -> select 3d viewport 
+- rendered mode (3d viewport -> top right menu dropdown) -> compositor -> always
+
+#### disable compositor
+- only see original render without compositing effect: output properties tab -> post processing -> compositing -> off 
+
+#### add viewer node
+- CTRL + SHIFT + Left click on "render layer node" 
+- blender adds preview window and shows background render (now there is "viewer node" AND "composite node")
+- note if you drag stuff on viewer node its wont be in final result unless added to composite node
+
+#### SHORTCUTS
+- move background render around: ALT + MIDDLE MOUSE
+- select viewer node -> drag the background sample image corner  OR resize backround: shrink (v) / zoom (ALT+V)
+- move nodes: MIDDLE MOUSE BUTON 
+
+#### color management
+- AgX is more realist looking renders than "filmic"
+- render properties -> color management -> view transform -> agx -> look -> medium high contrast OR high contrast
+- exposure -1.622
+
+#### adding glare effect (sparkle) (9min 13sec)
+- add glare: shift + a -> glare and place ontop of the link between render layers and view node
+- streaks: 16 (the amount of lines on the glare)
+- threshold: how much of image is affected (high means only the bright things on scene is affected): 6.6
+- mix (sometimes its useful to see the effect on its own (value:1)): range between -1 (original render) and 1 (just the effect itself): -0.9 
+
+#### blending effects (glare / fog glow)
+- GLARE: mix: 1, threshold: 13.5, streak: 16
+- FOG-GLOW (duplicate the GLARE node: CTRL + SHIFT + D (duplicate but keep connected)) -> glare type: fog glow
+    - quality: HIGH, mix: 1, threshold:13.5, size:9
+
+##### add color mix
+- add color -> mix -> mix color node (has 2 inputs for "image") -> change from "mix" to "add"
+- set the output "image" to viewer node input
+- Factor -> defines strength of the bottom input (image)
+- so if you're blending and want to control it, put it in bottom input
+- our bottom is the glare node and we want to set low FAC value to dampen the effect of streaks 0.01
+- to blend our effect with our original render, duplicate the "mix color node" and drag onto composite link
+
+#### ADD lense distortion filter node (fisheye mode)
+- add (shift + a) -> transform -> lense distortion 
+- select "fit" 
+- amount: 0.01
+
+![compositing - end result](./11-compositing-end.png)
 
 ---
 
