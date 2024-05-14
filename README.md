@@ -557,6 +557,7 @@ TASK: you parent an empty for the camera at the center of the scene and then jus
 - Fileformat: ffmpeg -> render to video (if it crashes you loose all render progress)
 - use Fileformat: png -> sequence (number of images = length of animation keyframes)
 - output folder to render the multiple images to
+- UPDATE: donut bread -> add subsurface scattering -> weight: 1, radius X,Y,Z: 1, scale: 0.01m
 
 #### resuming a render
 - if your animation is 120 keyframes and each frame takes 1 min to render... it will take 2hrs to complete the render.
@@ -570,8 +571,12 @@ TASK: you parent an empty for the camera at the center of the scene and then jus
 - depth of field -> camera tab -> lower the fstop -> lower amount of things in focus (6-8 ideal)
 - render tab -> enable motion blur (check/enable)
 
-## Part 14: Finale!
+## Part 14: Finale - 2nd run of render from video editing workspace!
+
+[![14-output-video](./14-output-from-video-editing-workspace.png) <br/> click here](./14-output-from-video-editing-workspace%20.mp4)
+
 - TODO: turning image sequence into a video
+- NOTE: INSTEAD of turning off things (see below) start a new window -> video editing workspace and reselect 
 - we set an output folder to render to -> depending on number of key-frames...that will be the number of image renders
 - using blender to render video sequence: video editing -> video editing
 - in the sequence (bottom panel)-> add image sequence (SHIFT + A -> image sequence) -> select all (a) -> add image strip
@@ -583,6 +588,10 @@ TASK: you parent an empty for the camera at the center of the scene and then jus
 - encoding -> container (mpeg 4), output quality (perceptually lossless)
 - render -> render animation
 - NOTE: it knows to render using images (image sequence) because render output tab -> postprocessing -> sequencer is selected / and so it chooses that over rendering the camera
+- NOTE: when you are rendering the image sequence in video editor from images, you should turn off render properties -> color management: use default (because its "baked in" to the rendered images)
+- NOTE: turn off compositi  ng
+- NOTE: THE SECOND TIME YOU RUN RENDER (*from image sequence)-> the output should be mp4
+- NOTE: OUTPUT -> post processing -> sequencer needs to be selected -> RENDER
 
 ## Reference
 - [Blender Guru](https://www.youtube.com/playlist?list=PLjEaoINr3zgEPv5y--4MKpciLaoQYZB1Z)
