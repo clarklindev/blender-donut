@@ -573,7 +573,7 @@ TASK: you parent an empty for the camera at the center of the scene and then jus
 
 ## Part 14: Finale - 2nd run of render from video editing workspace!
 
-[![14-output-video](./14-output-from-video-editing-workspace.png) <br/> click here](./14-output-from-video-editing-workspace%20.mp4)
+[![14-output-video](./14-output-from-video-editing-workspace.png) <br/> click here](https://youtu.be/Pgjk1E38f_g)
 
 - TODO: turning image sequence into a video
 - NOTE: INSTEAD of turning off things (see below) start a new window -> video editing workspace and reselect 
