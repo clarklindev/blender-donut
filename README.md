@@ -1,6 +1,7 @@
 # Beginner Blender 4.0 Tutorial
 
 - F3 - search 
+- blender preferences -> interface -> status bar -> show video memory / show system memory etc 
 
 ## Part 01: fundamental user interface basics
 - 80/20 rule -> 20% of blender features are used 80% of the time
@@ -503,8 +504,85 @@ B - snapping mode
 ---
 
 ## Part 12: Animation
+- camera move from above to side using key-frame animation
+- instead of moving the camera...
+
+TASK: you parent an empty for the camera at the center of the scene and then just rotate the empty
+- move 3d cursor (hold SHIFT + rightclick) at center of scene 
+- add an empty (SHIFT + A -> empty) -> set display as "sphere" and scale it down
+- then set the empty as the parent for the camera: select camera...
+- SHIFT + select the empty -> set parent to (CTRL + P) -> Object (keep transform)
+- RESULT: if you rotate the empty, the camera moves with it
+
+#### animation viewport
+
+- NOTE: we are animating the empty
+- open dope sheet viewport
+
+##### 1. END POSITION
+- start by adding keyframe for end result of scene -> camera mode -> goto the keyframe eg 160th frame
+- select empty -> instert keyframe (press i while over 3d viewport) -> rotation
+
+##### 2. START POSITION
+- go to first frame (SHIFT + LEFT ARROW)
+- set scene for start position: rotate (R) on X-axis
+- add keyframe (i) 
+- you can delete the object transform rows that arent relevant: eg. y,z (we rotated on x)
+
+#### animation tweaks with "Graph editor"
+##### SHORTCUTS
+- Pan graph editor (middle mouse button)
+- autofit graph in window (home key OR CTRL + hold down middle mouse button)
+
+- open graph editor panel
+- below shows the curve for a quick start but smooth ease to end frame
+
+![graph-editor animation curve](./12-animation-graph-editor-curve.png)
+
+- graph-editor viewport -> select a dot -> grab curve handles -> use rotate (R) to change the angle of the curve
+- jumping to keyframes using up/down arrow keys
+- goto end frame and i (insert keyframe menu) -> scale
+
+#### zooming via scale -> adding intial camera "pull out/away" / adding end pull-out (10min29sec)
+- goto end frame 160 -> select pivot point (the empty) and to create the pull out/away effect -> scale the empty 
+- create a keyframe for scale: on frame 160 -> insert (i) -> scale
+- now goto frame 1 -> insert (i) -> scale
+- graph editor (when you have scale AND rotation on same graph) -> click normalize, it will plot both graphs at same relative scale together on the graph
+
 ## Part 13: Rendering
+- use cycles 
+- turn on denoise 
+- low sample count will affect quality (300 bare minium -> 500 quality ok -> 1000 sample count clean)
+- render animation -> framerate: 30
+- Fileformat: ffmpeg -> render to video (if it crashes you loose all render progress)
+- use Fileformat: png -> sequence (number of images = length of animation keyframes)
+- output folder to render the multiple images to
+
+#### resuming a render
+- if your animation is 120 keyframes and each frame takes 1 min to render... it will take 2hrs to complete the render.
+- if you are saving rendered progress to image sequence -> to continue at keyframe -> render properties tab -> uncheck "image sequence overwrite"
+- NOTE: it continues rendering at after the last rendered image in the sequence
+
+#### CHECKLIST BEFORE RENDER
+- normals -> normals should be blue: viewport overlays (top middle menu) -> face orientation
+- if you see red normals... flip it: edit mode -> select all that is affects -> flip normals (SHIFT + N)
+- depth of field -> camera tab -> select depth of field checkbox -> select focus object
+- depth of field -> camera tab -> lower the fstop -> lower amount of things in focus (6-8 ideal)
+- render tab -> enable motion blur (check/enable)
+
 ## Part 14: Finale!
+- TODO: turning image sequence into a video
+- we set an output folder to render to -> depending on number of key-frames...that will be the number of image renders
+- using blender to render video sequence: video editing -> video editing
+- in the sequence (bottom panel)-> add image sequence (SHIFT + A -> image sequence) -> select all (a) -> add image strip
+- you adjust the framerate (30 fps)
+- pause on end frame: click on strip edge (end) -> it should highlight white -> grab (g) -> move to frame eg 250 
+- add fadeout -> shift + A -> color
+- a block should be added to the sequence on its own layer -> Select it -> shift + a -> fade -> fade-in
+- set output file -> ffmpeg 
+- encoding -> container (mpeg 4), output quality (perceptually lossless)
+- render -> render animation
+- NOTE: it knows to render using images (image sequence) because render output tab -> postprocessing -> sequencer is selected / and so it chooses that over rendering the camera
 
 ## Reference
 - [Blender Guru](https://www.youtube.com/playlist?list=PLjEaoINr3zgEPv5y--4MKpciLaoQYZB1Z)
